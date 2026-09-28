@@ -85,19 +85,45 @@
 
         .logo {
             font-family: var(--font-display);
-            font-weight: 700; font-size: 1.35rem; letter-spacing: -0.01em;
+            font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em;
             color: var(--text-light); text-transform: uppercase;
-            display: inline-flex; align-items: center; gap: 11px;
+            display: inline-flex; align-items: center; gap: 12px;
+            -webkit-tap-highlight-color: transparent;
         }
         .logo .logo-mark {
-            width: 34px; height: 34px; border-radius: 11px; flex-shrink: 0;
-            display: grid; place-items: center; font-size: 1rem;
+            width: 36px; height: 36px; border-radius: 12px; flex-shrink: 0;
+            display: grid; place-items: center;
             background: var(--accent-grad);
             box-shadow: 0 6px 18px -4px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.35);
+            position: relative; overflow: hidden;
+            transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
         }
+        .logo .logo-mark::after {
+            content: ""; position: absolute; inset: 0; border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.28), transparent 55%);
+            pointer-events: none;
+        }
+        .logo .logo-mark-icon {
+            font-size: 1.05rem; line-height: 1; transform: translateY(0.5px);
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25));
+            transition: transform .4s cubic-bezier(.2,.8,.2,1);
+        }
+        .logo:hover .logo-mark {
+            transform: rotate(-10deg) scale(1.07);
+            box-shadow: 0 9px 22px -3px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        .logo:hover .logo-mark-icon { transform: rotate(10deg) translateY(0.5px); }
+        .logo:active .logo-mark { transform: scale(0.95); }
+
+        .logo-text { display: inline-flex; align-items: baseline; line-height: 1; }
         .logo .logo-accent {
             background: var(--accent-grad); -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent; color: transparent;
+            font-weight: 800;
+        }
+        .logo .logo-rest {
+            font-weight: 600; color: var(--text-light); opacity: 0.86;
+            margin-left: 0.5px; letter-spacing: 0.01em;
         }
 
         nav a {
@@ -554,8 +580,9 @@
             header { padding: 0.8rem max(4%, 14px); }
             #desktopNav { display: none; }
             .hamburger { display: flex; }
-            .logo { font-size: 1.1rem; }
+            .logo { font-size: 1.1rem; gap: 10px; }
             .logo .logo-mark { width: 30px; height: 30px; }
+            .logo .logo-mark-icon { font-size: 0.92rem; }
 
             .hero { height: 56vh; min-height: 380px; margin-top: 56px; }
             .hero h1 { padding: 0 6px; }
