@@ -1,0 +1,84 @@
+/* ============================================================
+   HoopStats · Açılış animasyonu (intro.js ile birlikte çalışır)
+   ============================================================ */
+#introSplash {
+    position: fixed; inset: 0; z-index: 10000; overflow: hidden;
+    background-color: #080c17;
+    background-image:
+        radial-gradient(1100px 600px at 78% -8%, rgba(255, 90, 24, 0.16), transparent 60%),
+        radial-gradient(900px 600px at 8% 8%, rgba(56, 102, 220, 0.14), transparent 55%);
+    color: #f8fafc; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .55s ease, transform .55s ease;
+    /* JS çalışmazsa bile perde 9 sn sonra kendiliğinden kalkar */
+    animation: hiFailsafe .4s ease 9s forwards;
+}
+#introSplash.hi-out { opacity: 0; transform: scale(1.03); pointer-events: none; }
+.no-intro #introSplash { display: none; }
+
+html.intro-on { overflow: hidden; animation: hiUnlock 0s linear 9.5s forwards; }
+@keyframes hiUnlock { to { overflow: visible; } }
+@keyframes hiFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+.hi-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* SMAÇ! */
+.hi-smac {
+    position: absolute; left: 50%; top: 15%;
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-weight: 700; font-size: clamp(2.8rem, 12vw, 6.5rem); line-height: 1;
+    letter-spacing: -.02em; color: #fff; white-space: nowrap;
+    text-shadow: 0 4px 0 #d94a0e, 0 0 38px rgba(255, 90, 24, .75);
+    opacity: 0; transform: translate(-50%, 0) rotate(-6deg) scale(.3);
+    pointer-events: none;
+}
+.hi-smac.pop { animation: hiPop 1s cubic-bezier(.2, .9, .25, 1.2) forwards; }
+@keyframes hiPop {
+    0%   { opacity: 0; transform: translate(-50%, 0) rotate(-6deg) scale(.3); }
+    18%  { opacity: 1; transform: translate(-50%, 0) rotate(-6deg) scale(1.18); }
+    32%  { transform: translate(-50%, 0) rotate(-6deg) scale(1); }
+    75%  { opacity: 1; transform: translate(-50%, 0) rotate(-6deg) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -14px) rotate(-6deg) scale(1.04); }
+}
+
+/* Başlık */
+.hi-title {
+    position: absolute; left: 0; right: 0;
+    bottom: max(6vh, calc(env(safe-area-inset-bottom, 0px) + 30px));
+    padding: 0 20px; text-align: center; pointer-events: none;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+.hi-title.show { opacity: 1; transform: none; }
+.hi-logo, .hi-logo * {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+}
+.hi-logo {
+    font-weight: 700; font-size: clamp(2.7rem, 9.5vw, 5.4rem); line-height: 1;
+    letter-spacing: -.035em; text-shadow: 0 6px 30px rgba(0, 0, 0, .55);
+}
+.hi-logo .a {
+    background: var(--accent-grad, linear-gradient(135deg, #ff6322 0%, #ff9248 100%));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hi-sub {
+    margin-top: .7rem; font-size: clamp(.95rem, 2.7vw, 1.2rem); font-weight: 500;
+    color: #c3cee0; text-shadow: 0 2px 14px rgba(0, 0, 0, .6);
+}
+
+/* Geç */
+.hi-skip {
+    position: absolute; z-index: 2;
+    top: calc(env(safe-area-inset-top, 0px) + 14px); right: 14px;
+    min-height: 44px; padding: 0 1.15rem; border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, .28);
+    background: rgba(15, 23, 42, .6); color: #e2e8f0;
+    font: 600 .9rem/1 var(--font-body, 'Inter', sans-serif); cursor: pointer;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    transition: background .2s ease, border-color .2s ease;
+}
+.hi-skip:hover { background: rgba(30, 41, 59, .85); border-color: rgba(255, 138, 69, .6); }
+
+@media (prefers-reduced-motion: reduce) {
+    #introSplash { display: none; }
+}

@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script>(function(){var d=document.documentElement,skip=false;try{skip=!/[?&]intro=1(&|$)/.test(location.search)&&sessionStorage.getItem("hoopIntroSeen")==="1"}catch(e){}try{if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)skip=true}catch(e){}d.classList.add(skip?"no-intro":"intro-on")})();</script>
     <title>HoopStats | Diyet, Antrenman ve Maç Takvimi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="intro.css">
+    <noscript><style>#introSplash{display:none!important}html.intro-on{overflow:auto!important}</style></noscript>
 </head>
 <body>
+
+    <!-- AÇILIŞ ANİMASYONU: koşar, smaç basar, kas yapar (intro.js / intro.css) -->
+    <div id="introSplash">
+        <svg class="hi-svg" id="hiSvg" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice"></svg>
+        <div class="hi-smac" aria-hidden="true">SMAÇ!</div>
+        <div class="hi-title">
+            <div class="hi-logo"><span class="a">Hoop</span>Stats</div>
+            <div class="hi-sub">Diyetin, antrenmanın ve maç takvimin tek yerde.</div>
+        </div>
+        <button class="hi-skip" type="button" aria-label="Açılış animasyonunu geç">Geç</button>
+    </div>
+
 
     <header>
         <div class="logo" onclick="showView('home')"><span class="logo-mark"><span class="logo-mark-icon">🏀</span></span><span class="logo-text"><span class="logo-accent">Hoop</span><span class="logo-rest">Stats</span></span><span class="view-label" id="currentViewLabel"></span></div>
@@ -1232,5 +1247,6 @@
     </div>
 
     <script src="app.js"></script>
+    <script src="intro.js"></script>
 </body>
 </html>
